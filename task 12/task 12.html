@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>STORE MULTIPLE DATA </title>
+</head>
+<body>
+
+<section class="container">
+    <form onsubmit="funsave(event)">
+    
+        <label for="username" class="form-label" id="nameid">NAME:</label>
+        <input type="text" class="form-control" id="nameinput"  name="namename">
+   
+   
+    
+        <label for="useremail" class="form-label" id="emailid">EMAIL:</label>
+        <input type="email" class="form-control" id="emailinput" name="emailname">
+    
+        <label for="userphoneno" class="form-label" id="phonenoid" >PHONE NO: </label>
+        <input type="number"  class="form-control" id="phonenoinput" name="phonename">
+   
+        <input type="submit" class="btn" value="submit" name="submitname">
+
+          
+        // extra ul for sharpener code 
+        <ul class="liclass" id="liid"> </ul>
+
+              
+    </form>
+</section>             
+ 
+<script>                         // HERE NAME ATTRIBUTE IN INPUT TYPE IS VERY IMPORTANT FOR FUNCTION :
+       function funsave(event){
+       event.preventDefault() ;      
+        
+       //retrivieng data by name :
+        const username=event.target.namename.value;
+        const useremail=event.target.emailname.value;
+        const userphoneno=event.target.phonename.value;
+        
+        localStorage.setItem("NAME :",username);
+        localStorage.setItem("useremail",useremail);
+        localStorage.setItem("userphoneno",userphoneno);
+
+        
+        
+        const userdetails={ username,useremail,userphoneno};
+
+
+        
+        localStorage.setItem(userdetails,JSON.stringify(username));
+
+        localStorage.setItem("USER DETAILS :",JSON.stringify(userdetails));
+      
+        
+       showuseronscreen(userdetails)
+
+
+       }
+       function showuseronscreen(userdetails){
+
+       var parelement=document.getElementById('liid');
+
+       var childelement=document.createElement('li')   /// akshxar akshxar@gmail.com 45465645
+       childelement.textContent= userdetails.username + " " + userdetails.useremail + " " + userdetails.userphoneno
+
+        parelement.appendChild(childelement)
+
+        
+       }
+
+</script>
+
+
+    
+</body>
+</html>
