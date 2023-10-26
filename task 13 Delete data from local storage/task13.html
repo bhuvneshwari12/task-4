@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>STORE MULTIPLE DATA </title>
+</head>
+<body>
+
+<section class="container">
+     <h1> DETAILS FOR ENQUIRY </h1>
+
+    <form onsubmit="funsave(event)">
+    
+        <label for="username" class="form-label" id="nameid">NAME:</label>
+        <input type="text" class="form-control" id="nameinput"  name="namename">
+   
+        <label for="useremail" class="form-label" id="emailid">EMAIL:</label>
+        <input type="email" class="form-control" id="emailinput" name="emailname">
+    
+        <label for="userphoneno" class="form-label" id="phonenoid" >PHONE NO: </label>
+        <input type="number"  class="form-control" id="phonenoinput" name="phonename">
+   
+        <input type="submit" class="btn btn-dark" value="submit" name="submitname">
+    </form>
+     <ul id="list-of-items"></ul>
+
+
+
+</section>             
+ 
+<script>                         // HERE NAME ATTRIBUTE IN INPUT TYPE IS VERY IMPORTANT FOR FUNCTION :
+       
+       // 1st function for save data in localstorage
+       function funsave(event) 
+       {
+       event.preventDefault() ;      
+
+        const username=event.target.namename.value;
+        const useremail=event.target.emailname.value;
+        const userphoneno=event.target.phonename.value;
+
+        const userdetails={ username,useremail,userphoneno};
+        
+        localStorage.setItem(userdetails.username,JSON.stringify(userdetails));
+        
+        showuseronscreen(userdetails)
+       }
+
+       //2nd function : showing list of userdetails on screen 
+
+       function showuseronscreen(userdetails)
+       {
+          const parentele=document.getElementById('list-of-items');
+          const childele=document.createElement('li');
+          childele.textContent=userdetails.username + "-" +userdetails.useremail +"-" + userdetails.userphoneno
+          
+
+          const deletebutton=document.createElement('input');
+          deletebutton.type='button'
+          deletebutton.value='delete'
+          deletebutton.onclick =() => {
+            
+            localStorage.removeItem(userdetails.username);
+            parentele.removeChild(childele);
+          }
+
+          parentele.appendChild(childele);
+          childele.appendChild(deletebutton);
+           
+
+       }
+
+</script>
+
+
+    
+</body>
+</html>
